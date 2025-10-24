@@ -1,18 +1,19 @@
-# Question 1: DFT, IDFT, and Twiddle Matrices (Simplified)
+# Question 1: DFT, IDFT, and Twiddle Matrix
 import numpy as np
 from numpy.fft import fft, ifft
+
 x = np.array([1, 2, 3, 4])
 N = len(x)
-# DFT & Twiddle Matrix
-X = fft(x)
 n = np.arange(N)
 k = n.reshape((N, 1))
+
+# DFT and Twiddle Matrix
+X = fft(x)
 W = np.exp(-2j * np.pi * k * n / N)
-# IDFT & Conjugate Twiddle Matrix
+
+# IDFT (Reconstruction)
 x_idft = ifft(X)
-W_conj = np.conjugate(W)
 print("x(n):", x)
 print("X(k):", np.round(X, 2))
 print("Twiddle Matrix (W):\n", np.round(W, 2))
-print("Reconstructed x(n):", np.round(x_idft, 2))
-print("Conjugate Twiddle Matrix (W*):\n", np.round(W_conj, 2))
+print("Reconstructed x(n) using IDFT:", np.round(x_idft, 2))
